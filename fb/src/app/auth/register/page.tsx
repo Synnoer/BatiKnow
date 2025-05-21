@@ -1,6 +1,6 @@
 "use client";
 
-import { faLock, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faAddressCard, faLock, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -10,15 +10,16 @@ import toast from "react-hot-toast";
 export default function LoginPage() {
   const router = useRouter();
 
+  const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
 
-    const res = await fetch("/api/login", {
+    const res = await fetch("/api/register", {
       method: "POST",
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify({ name, username, password }),
       headers: { "Content-Type": "application/json" },
     });
 
@@ -35,13 +36,35 @@ export default function LoginPage() {
   return (
     <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
       <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-gray-800">Welcome Back</h1>
+        <h1 className="text-3xl font-bold text-gray-800">Register</h1>
         <p className="text-gray-600 mt-2">
-          Please enter your details to sign in
+          Please enter your details to sign up
         </p>
       </div>
 
       <form onSubmit={handleSubmit}>
+        <div className="mb-4">
+          <label
+            htmlFor="name"
+            className="block text-gray-700 text-sm font-medium mb-2"
+          >
+            Name
+          </label>
+          <div className="relative">
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <FontAwesomeIcon icon={faAddressCard} className="text-gray-400" />
+            </div>
+            <input
+              type="text"
+              id="name"
+              className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
+              placeholder="Username"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+        </div>
+
         <div className="mb-4">
           <label
             htmlFor="username"
@@ -86,41 +109,21 @@ export default function LoginPage() {
           </div>
         </div>
 
-        <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center">
-            <input
-              id="remember-me"
-              type="checkbox"
-              className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-            />
-            <label
-              htmlFor="remember-me"
-              className="ml-2 block text-sm text-gray-700"
-            >
-              Remember me
-            </label>
-          </div>
-          <a href="#" className="text-sm text-blue-600 hover:text-blue-800">
-            Forgot password?
-          </a>
-        </div>
-
         <button
           type="submit"
           className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-150"
         >
-          Sign In
+          Sign Up
         </button>
 
         <div className="mt-6 text-center">
           <p className="text-gray-600 text-sm">
-            Don't have an account?
+            Already have an account?
             <Link
-              
-              href="/auth/register"
+              href="/auth/login"
               className="text-blue-600 hover:text-blue-800 font-medium"
             >
-              Sign up
+              Sign in
             </Link>
           </p>
         </div>

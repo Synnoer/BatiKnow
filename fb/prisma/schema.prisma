@@ -9,7 +9,7 @@ datasource db {
 }
 
 model batik {
-  uuid        String    @unique(map: "Batik_uuid_key")
+  uuid        String    @unique(map: "Batik_uuid_key") @default(uuid())
   name        String
   originCity  String
   description String
@@ -17,7 +17,7 @@ model batik {
 }
 
 model history {
-  uuid       String   @unique(map: "History_uuid_key")
+  uuid       String   @unique(map: "History_uuid_key") @default(uuid())
   user_uuid  String
   batikUuid  String
   pictureUrl String
@@ -30,7 +30,7 @@ model history {
 }
 
 model user {
-  uuid      String    @unique(map: "User_uuid_key")
+  uuid      String    @unique(map: "User_uuid_key") @default(uuid())
   username  String    @unique(map: "User_username_key")
   name      String
   password  String
