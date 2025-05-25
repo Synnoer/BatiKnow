@@ -1,13 +1,17 @@
-import Image from "next/image";
+import { NavBar } from "./component/navigation";
+import { About } from "./component/about";
+import { Service } from "./component/service";
+import { Footer } from "./component/footer";
 
 export default function Home() {
   return (
     <div>
-      <div>
-        This is correct and should work because a div is really good for this
-        task.
+      <NavBar></NavBar>
+      <div className="bg-gray-100">
+        <About></About>
+        <Service></Service>
+        <Footer></Footer>
       </div>
-      <Image src="/vercel.svg" alt="" width="30" height="30" />
     </div>
   );
 }
