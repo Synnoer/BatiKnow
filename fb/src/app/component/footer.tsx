@@ -4,7 +4,7 @@ import React from "react";
 
 export const Footer = (): React.ReactElement => {
     return (
-        <div className="flex justify-around text-wrap py-10 bg-red-800 text-white">
+        <div className="flex justify-around text-wrap py-10 pb-20 sm:pb-0 bg-red-800 text-white">
             <div>
                 <h3 className="text-lg font-bold">BatiKnow</h3>
                 <p className="text-sm text-gray-300 max-w-40">Kunjungi BatiKnow dan perluas wawasanmu tentang beragam motif, teknik, dan filosofi batik dari seluruh Indonesia</p>

@@ -5,9 +5,9 @@ import { Footer } from "./component/footer";
 
 export default function Home() {
   return (
-    <div>
+    <div className="bg-gray-100">
       <NavBar></NavBar>
-      <div className="bg-gray-100">
+      <div>
         <About></About>
         <Service></Service>
         <Footer></Footer>
