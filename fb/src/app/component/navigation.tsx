@@ -18,7 +18,7 @@ export const NavBar = (): React.ReactElement => {
 
     return (
         <div id="navbar" className="sticky top-0 rounded-b-lg sm:rounded-none sm:pt-4 bg-red-800">
-            <div className="border-1 rounded-b-lg sm:rounded-none sm:mx-10 p-2 bg-white shadow-md">
+            <div className="border-1 rounded-b-lg sm:rounded-none p-2 bg-white shadow-md max-w-6xl mx-auto">
                 <div className="flex justify-between items-center">
                     <Link href="/" className="font-bold text-2xl text-red-500">BatiKnow</Link>
                     <div className="flex gap-2">

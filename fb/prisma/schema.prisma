@@ -12,7 +12,8 @@ model batik {
   uuid        String    @unique(map: "Batik_uuid_key") @default(uuid())
   name        String
   originCity  String
-  description String
+  description String    @db.Text
+  reference   String
   history     history[]
 }
 
