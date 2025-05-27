@@ -5,6 +5,7 @@ import "./globals.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { Toaster } from "react-hot-toast";
+import { NavBar } from "./component/navigation";
 config.autoAddCss = false;
 
 const geistSans = Geist({
@@ -31,11 +32,11 @@ export default function RootLayout({
     <html lang="en">
       <body
         suppressHydrationWarning
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
       >
         <Toaster />
-
-        {children}
+        <NavBar />
+          {children}
       </body>
     </html>
   );

@@ -35,7 +35,7 @@ export default function LoginPage() {
   return (
     <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
       <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-gray-800">Welcome Back</h1>
+        <h1 className="text-3xl font-bold text-gray-800">Login</h1>
         <p className="text-gray-600 mt-2">
           Please enter your details to sign in
         </p>
@@ -107,18 +107,18 @@ export default function LoginPage() {
 
         <button
           type="submit"
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-150"
+          className="cursor-pointer w-full bg-red-500 hover:bg-red-800 text-white font-medium py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-150"
         >
           Sign In
         </button>
 
         <div className="mt-6 text-center">
           <p className="text-gray-600 text-sm">
-            Don't have an account?
+            Don&apos;t have an account?
             <Link
               
               href="/auth/register"
-              className="text-blue-600 hover:text-blue-800 font-medium"
+              className="text-red-600 hover:text-red-800 font-medium"
             >
               Sign up
             </Link>

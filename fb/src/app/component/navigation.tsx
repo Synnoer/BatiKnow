@@ -4,9 +4,16 @@ import { faCamera, faHome, faListUl, faMap, faSearch } from "@fortawesome/free-s
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import React from "react"
+import React, { useEffect, useState } from "react"
 
 export const NavBar = (): React.ReactElement => {
+    const [isVisible, setIsVisible] = useState(false)
+
+  useEffect(() => {
+    // Bikin animasi muncul setelah mount
+    const timer = setTimeout(() => setIsVisible(true), 100)
+    return () => clearTimeout(timer)
+  }, [])
     const router = useRouter()
 
     return (
@@ -30,13 +37,19 @@ export const NavBar = (): React.ReactElement => {
                     </div>
                 </div>
             </div>
-            <div className="fixed flex justify-evenly bottom-0 w-full py-2 rounded-t-lg text-xl bg-red-900 sm:hidden">
-                <Link href="/" className="flex hover:bg-white hover:text-red-500 hover:text-2xl rounded-full p-6 w-9 h-9 items-center justify-center"><FontAwesomeIcon icon={faHome} /></Link>
-                <Link href="/list" className="flex hover:bg-white hover:text-red-500 hover:text-2xl rounded-full p-6 w-9 h-9 items-center justify-center"><FontAwesomeIcon icon={faListUl} /></Link>
-                <Link href="/scan" className="flex hover:bg-white hover:text-red-500 hover:text-2xl rounded-full p-6 w-9 h-9 items-center justify-center"><FontAwesomeIcon icon={faCamera} /></Link>
-                <Link href="/region" className="flex hover:bg-white hover:text-red-500 hover:text-2xl rounded-full p-6 w-9 h-9 items-center justify-center"><FontAwesomeIcon icon={faMap} /></Link>
-                <Link href="/" className="flex hover:bg-white hover:text-red-500 hover:text-2xl rounded-full p-6 w-9 h-9 items-center justify-center"><FontAwesomeIcon icon={faSearch} /></Link>
-            </div>
+            <div
+      className={`
+        fixed bottom-0 w-full py-2 bg-red-900 text-xl rounded-t-lg sm:hidden flex justify-evenly
+        transform transition-transform duration-500
+        ${isVisible ? "translate-y-0" : "translate-y-full"}
+      `}
+    >
+      <Link href="/" className="flex hover:bg-white hover:text-red-500 hover:text-2xl rounded-full p-6 w-9 h-9 items-center justify-center"><FontAwesomeIcon icon={faHome} /></Link>
+      <Link href="/list" className="flex hover:bg-white hover:text-red-500 hover:text-2xl rounded-full p-6 w-9 h-9 items-center justify-center"><FontAwesomeIcon icon={faListUl} /></Link>
+      <Link href="/scan" className="flex hover:bg-white hover:text-red-500 hover:text-2xl rounded-full p-6 w-9 h-9 items-center justify-center"><FontAwesomeIcon icon={faCamera} /></Link>
+      <Link href="/region" className="flex hover:bg-white hover:text-red-500 hover:text-2xl rounded-full p-6 w-9 h-9 items-center justify-center"><FontAwesomeIcon icon={faMap} /></Link>
+      <Link href="/search" className="flex hover:bg-white hover:text-red-500 hover:text-2xl rounded-full p-6 w-9 h-9 items-center justify-center"><FontAwesomeIcon icon={faSearch} /></Link>
+    </div>
         </div>
     )
 }
