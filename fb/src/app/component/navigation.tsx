@@ -17,7 +17,7 @@ export const NavBar = (): React.ReactElement => {
     const router = useRouter()
 
     return (
-        <div id="navbar" className="sticky top-0 rounded-b-lg sm:rounded-none sm:pt-4 bg-red-800">
+        <div id="navbar" className="sticky top-0 rounded-b-lg sm:rounded-none sm:pt-4 bg-red-800 z-50">
             <div className="border-1 rounded-b-lg sm:rounded-none p-2 bg-white shadow-md max-w-6xl mx-auto">
                 <div className="flex justify-between items-center">
                     <Link href="/" className="font-bold text-2xl text-red-500">BatiKnow</Link>
