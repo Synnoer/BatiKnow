@@ -8,10 +8,9 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ uuid
     where: { uuid: awaitedParams.uuid },
   });
 
-    if (!batik) {
-      return NextResponse.json({ message: 'Not Found' }, { status: 404 });
-    }
+  if (!batik) {
+    return NextResponse.json({ message: 'Not Found' }, { status: 404 });
+  }
 
-    return NextResponse.json({ message: 'Success', data: batik });
-  
+  return NextResponse.json({ message: 'Success', data: batik });
 }

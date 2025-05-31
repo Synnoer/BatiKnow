@@ -83,7 +83,6 @@ export default function ScanLayout() {
     const images: string[] = [];
     for (let i = 1; i < 9; i++)
       images.push(`/images/${batik?.name}/picture-${i}.jpg`);
-    console.log([previewUrl || "", ...images]);
     return [previewUrl || "", ...images];
   }, [previewUrl, batik]);
 

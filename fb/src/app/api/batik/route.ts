@@ -4,7 +4,7 @@ import { Prisma } from '../../../../db/generated/prisma';
 
 export async function GET(req: NextRequest) {
     const search = req.nextUrl.searchParams.get('search');
-    const query: Prisma.batikFindManyArgs = {}
+    const query: Prisma.BatikFindManyArgs = {}
     if (search) query.where = {
         OR: [{ name: { contains: search } }, { originCity: { contains: search } }]
     }

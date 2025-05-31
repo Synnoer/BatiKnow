@@ -1,11 +1,11 @@
-import * as tf from '@tensorflow/tfjs-node';
+import { node, image, tidy, tensor1d, loadGraphModel, Tensor } from '@tensorflow/tfjs-node';
 import path from 'path'
 
 async function loadImageAsTensor(imageBuffer: Buffer) {
-    const imageTensor = tf.node.decodeImage(imageBuffer, 3); // RGB
+    const imageTensor = node.decodeImage(imageBuffer, 3); // RGB
 
     // Resize ke 224x224
-    const resized = tf.image.resizeBilinear(imageTensor, [224, 224]);
+    const resized = image.resizeBilinear(imageTensor, [224, 224]);
 
     // Ubah ke float32 dan skalakan ke [0,1]
     const floatImg = resized.toFloat().div(255.0);
@@ -14,9 +14,9 @@ async function loadImageAsTensor(imageBuffer: Buffer) {
     const meanRgb = [0.485, 0.456, 0.406];
     const stdRgb = [0.229, 0.224, 0.225];
 
-    const normalized = tf.tidy(() => {
-        const meanTensor = tf.tensor1d(meanRgb);
-        const stdTensor = tf.tensor1d(stdRgb);
+    const normalized = tidy(() => {
+        const meanTensor = tensor1d(meanRgb);
+        const stdTensor = tensor1d(stdRgb);
 
         return floatImg.sub(meanTensor).div(stdTensor);
     });
@@ -29,13 +29,13 @@ async function loadImageAsTensor(imageBuffer: Buffer) {
 
 export async function scan(imageBuffer: Buffer<ArrayBuffer>) {
     // Load model
-    const model = await tf.loadGraphModel('file://' + path.resolve(__dirname, '../../../../../src/model', 'model.json'));
+    const model = await loadGraphModel('file://' + path.resolve(__dirname, '../../../../../src/model', 'model.json'));
 
     // Load dan proses gambar
     const inputTensor = await loadImageAsTensor(imageBuffer);
 
     // // Prediksi
-    const prediction = model.predict(inputTensor) as tf.Tensor;
+    const prediction = model.predict(inputTensor) as Tensor;
 
     // // Jika hasilnya Tensor 2D bisa di-argMax untuk ambil label
     const labelIndex = prediction.argMax(-1).dataSync()[0];
