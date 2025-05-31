@@ -1,14 +1,18 @@
 "use client";
 
-import { faAddressCard, faLock, faUser } from "@fortawesome/free-solid-svg-icons";
+import { useAuth } from "@/context/AuthContext";
+import {
+  faAddressCard,
+  faLock,
+  faSpinner,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
-import toast from "react-hot-toast";
+import Link from "next/link";
 
 export default function LoginPage() {
-  const router = useRouter();
+  const { register, loading } = useAuth();
 
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
@@ -17,20 +21,7 @@ export default function LoginPage() {
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
 
-    const res = await fetch("/api/register", {
-      method: "POST",
-      body: JSON.stringify({ name, username, password }),
-      headers: { "Content-Type": "application/json" },
-    });
-
-    if (res.ok) {
-      const { message } = await res.json();
-      toast.success(message);
-      router.push("/");
-    } else {
-      const { error } = await res.json();
-      toast.error(error);
-    }
+    await register(name, username, password);
   }
 
   return (
@@ -57,8 +48,8 @@ export default function LoginPage() {
             <input
               type="text"
               id="name"
-              className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
-              placeholder="Username"
+              className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent text-black"
+              placeholder="Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
@@ -79,7 +70,7 @@ export default function LoginPage() {
             <input
               type="text"
               id="username"
-              className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
+              className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent text-black"
               placeholder="Username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
@@ -101,7 +92,7 @@ export default function LoginPage() {
             <input
               type="password"
               id="password"
-              className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
+              className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent text-black"
               placeholder="••••••••"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -110,10 +101,15 @@ export default function LoginPage() {
         </div>
 
         <button
+          disabled={loading}
           type="submit"
-          className="w-full bg-red-500 hover:bg-red-800 text-white font-medium py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-150"
+          className="w-full bg-red-500 hover:bg-red-800 text-white font-medium py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition duration-150"
         >
-          Sign Up
+          {loading ? (
+            <FontAwesomeIcon icon={faSpinner} className="fa-spin" />
+          ) : (
+            "Sign Up"
+          )}
         </button>
 
         <div className="mt-6 text-center">

@@ -2,14 +2,14 @@ import { PrismaClient, Prisma } from "../db/generated/prisma";
 
 const prisma = new PrismaClient();
 
-const userData: Prisma.userCreateInput[] = [
+const userData: Prisma.UserCreateInput[] = [
     {
         name: "Devi Mulyana",
         username: "jangbe",
         password: "$2y$10$FMpsHjRpqEC8WU6690qdTefsJIy1kOY3cfEDI8fO/tQlXC33lGpKu",
     }
 ];
-const batikData: Prisma.batikCreateManyInput[] = [
+const batikData: Prisma.BatikCreateInput[] = [
     {
         "name": "Pintu Aceh",
         "originCity": "Aceh",
@@ -61,8 +61,8 @@ const batikData: Prisma.batikCreateManyInput[] = [
     {
         "name": "Dayak",
         "originCity": "Kalimantan",
-        "description": "",
-        "reference": ""
+        "description": "Batik Dayak merupakan warisan budaya dari masyarakat Dayak di Kalimantan, dengan motif yang mencerminkan filosofi, spiritualitas, dan hubungan erat dengan alam. Salah satu motif yang terkenal adalah Benang Bintik, khas Kalimantan Tengah, yang menampilkan simbol-simbol seperti naga, senjata tradisional, dan Batang Garing—pohon kehidupan yang dipercaya berasal dari Tuhan Dayak Ngaju, Ranying Hatalla Langit.",
+        "reference": "orami.co.id"
     },
     {
         "name": "Gajah",
@@ -145,8 +145,8 @@ const batikData: Prisma.batikCreateManyInput[] = [
     {
         "name": "Rumah Minang",
         "originCity": "Sumatera Barat",
-        "description": "",
-        "reference": ""
+        "description": "Batik motif Rumah Gadang menggambarkan rumah adat Minangkabau dengan atap melengkung menyerupai tanduk kerbau, dikenal sebagai gonjong. Motif ini tidak hanya menampilkan bentuk fisik rumah, tetapi juga mengandung nilai-nilai budaya seperti kekuatan, keharmonisan, dan kejayaan. Ukiran-ukiran yang terdapat pada Rumah Gadang, seperti motif pucuak rabuang (tunas bambu) dan kaluak paku (pakis muda), sering diadaptasi ke dalam desain batik, melambangkan pertumbuhan, kesuburan, dan kebijaksanaan.",
+        "reference": "rumahbatikbedjo.com"
     },
     {
         "name": "Boraspati",
@@ -159,6 +159,12 @@ const batikData: Prisma.batikCreateManyInput[] = [
         "originCity": "Yogyakarta",
         "description": "Motif Batik Kawung merupakan motif batik yang bentuknya berupa bulatan mirip buah kawung (sejenis kelapa atau kadang juga dianggap sebagai aren atau kolang-kaling) yang ditata rapi secara geometris. Motif kawung bermakna kesempurnaan, kemurnian dan kesucian. Pada awalnya motif ini muncul pada ukiran dinding di beberapa candi di Jawa seperti Prambanan. Dalam kaitannya dengan kata suwung yang berarti kosong, motif kawung menyimbolkan kekosongan nafsu dan hasrat duniawi, sehingga menghasilkan pengendalian diri yang sempurna. Kekosongan ini menjadikan seseorang netral, tidak berpihak, tidak ingin menonjolkan diri, mengikuti arus kehidupan, membiarkan segala yang ada disekitarnya berjalan sesuai kehendak alam.",
         "reference": "budaya.jogjaprov.go.id"
+    },
+    {
+        "name": "Sidomukti",
+        "originCity": "Yogyakarta",
+        "description": "Motif batik Sidomukti sarat akan filosofi yang melambangkan harapan akan kebahagiaan dan kesejahteraan. Setiap elemennya memiliki makna mendalam: motif bunga menyimbolkan kehidupan, kecantikan, kesuburan, pertumbuhan, dan kemakmuran; motif kupu-kupu merepresentasikan metamorfosis dan perjalanan menuju pencerahan; sementara motif Garuda melambangkan kegagahan, kewibawaan, kemuliaan, dan kehormatan. Oleh karena itu, batik Sidomukti sering dipilih untuk acara penting seperti pernikahan, membawa doa dan harapan baik bagi pemakainya.",
+        "reference": "hassa.co.id"
     }
 ]
 
@@ -167,7 +173,9 @@ export async function main() {
         await prisma.user.create({ data: u });
     }
 
-    await prisma.batik.createMany({ data: batikData })
+    for (const i in batikData) {
+        await prisma.batik.create({ data: {...batikData[i], classId: i} })
+    }
 }
 
 main();

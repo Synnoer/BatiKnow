@@ -1,5 +1,7 @@
 import prisma from '@/lib/prisma'
 import bcrypt from 'bcryptjs';
+import { User } from '@/context/AuthContext';
+import { signToken } from '@/lib/jwt';
 import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
@@ -15,13 +17,15 @@ export async function POST(req: Request) {
         return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
     }
 
-    const res = NextResponse.json({ message: 'Login success' });
+    const resData: User = { uuid: user.uuid, username, name: user.name };
+    const token = signToken(resData, { expiresIn: '1d' })
+    const res = NextResponse.json({ message: 'Login success', user: resData });
 
-    // Simulasi set cookie (misalnya JWT atau session ID)
-    res.cookies.set('token', 'mock-token-123', {
+    res.cookies.set('token', token, {
         httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        maxAge: 60 * 60 * 24, // 1 hari
         path: '/',
-        maxAge: 60 * 60, // 1 jam
     });
 
     return res;

@@ -6,6 +6,8 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { Toaster } from "react-hot-toast";
 import { NavBar } from "./component/navigation";
+import { AuthProvider } from "@/context/AuthContext";
+
 config.autoAddCss = false;
 
 const poppinsSans = Poppins({
@@ -24,15 +26,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        suppressHydrationWarning
-        className={`${poppinsSans.className} antialiased flex flex-col min-h-screen bg-gray-100`}
-      >
-        <Toaster />
-        <NavBar />
-        {children}
-      </body>
-    </html>
+    <AuthProvider>
+      <html lang="en">
+        <body
+          suppressHydrationWarning
+          className={`${poppinsSans.className} antialiased flex flex-col min-h-screen bg-gray-100`}
+        >
+          <Toaster />
+          <NavBar />
+          {children}
+        </body>
+      </html>
+    </AuthProvider>
   );
 }

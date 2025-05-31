@@ -1,14 +1,13 @@
 "use client";
 
-import { faLock, faUser } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
-import toast from "react-hot-toast";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLock, faUser } from "@fortawesome/free-solid-svg-icons";
+import { useAuth } from "@/context/AuthContext";
+import Link from "next/link";
 
 export default function LoginPage() {
-  const router = useRouter();
+  const { login, loading } = useAuth();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -16,20 +15,7 @@ export default function LoginPage() {
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
 
-    const res = await fetch("/api/login", {
-      method: "POST",
-      body: JSON.stringify({ username, password }),
-      headers: { "Content-Type": "application/json" },
-    });
-
-    if (res.ok) {
-      const { message } = await res.json();
-      toast.success(message);
-      router.push("/");
-    } else {
-      const { error } = await res.json();
-      toast.error(error);
-    }
+    await login(username, password);
   }
 
   return (
@@ -56,7 +42,7 @@ export default function LoginPage() {
             <input
               type="text"
               id="username"
-              className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
+              className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent text-black"
               placeholder="Username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
@@ -78,7 +64,7 @@ export default function LoginPage() {
             <input
               type="password"
               id="password"
-              className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
+              className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent text-black"
               placeholder="••••••••"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -91,7 +77,7 @@ export default function LoginPage() {
             <input
               id="remember-me"
               type="checkbox"
-              className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+              className="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded"
             />
             <label
               htmlFor="remember-me"
@@ -100,14 +86,15 @@ export default function LoginPage() {
               Remember me
             </label>
           </div>
-          <a href="#" className="text-sm text-blue-600 hover:text-blue-800">
+          <a href="#" className="text-sm text-red-600 hover:text-red-800">
             Forgot password?
           </a>
         </div>
 
         <button
+          disabled={loading}
           type="submit"
-          className="cursor-pointer w-full bg-red-500 hover:bg-red-800 text-white font-medium py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-150"
+          className="cursor-pointer w-full bg-red-500 hover:bg-red-800 text-white font-medium py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition duration-150 disabled:bg-red-400"
         >
           Sign In
         </button>
@@ -116,7 +103,6 @@ export default function LoginPage() {
           <p className="text-gray-600 text-sm">
             Don&apos;t have an account?
             <Link
-              
               href="/auth/register"
               className="text-red-600 hover:text-red-800 font-medium"
             >
