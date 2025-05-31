@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
 
 type Batik = {
   uuid: number;
@@ -76,7 +77,8 @@ export default function ListLayout() {
       ) : (
         <div className="container max-w-6xl mx-auto p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-black">
           {batikData.map((batik) => (
-            <div
+            <Link
+              href={`/list/${batik.uuid}`}
               key={batik.uuid}
               className="bg-white rounded-xl shadow p-4 border border-gray-200"
             >
@@ -91,7 +93,7 @@ export default function ListLayout() {
 
               <h2 className="text-lg font-semibold">{batik.name}</h2>
               <p className="text-gray-600">Asal: {batik.originCity}</p>
-            </div>
+            </Link>
           ))}
         </div>
       )}
