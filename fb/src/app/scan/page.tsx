@@ -155,7 +155,7 @@ export default function ScanLayout() {
         </div>
       ) : (
         <div className="flex-grow flex flex-col items-center bg-gray-100 mb-16 sm:mb-3 pt-4 text-black">
-          <div className="rounded-sm bg-white p-2 sm:w-3xl">
+          <div className="rounded-sm bg-white p-2 sm:w-3xl shadow">
             <div className="flex flex-wrap -mx-2">
               <div className="w-full sm:w-1/2 px-2 mb-2 sm:mx-0 mx-2">
                 <Carousel

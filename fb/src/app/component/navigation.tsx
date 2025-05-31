@@ -1,28 +1,49 @@
 "use client";
 
-import { useAuth } from "@/context/AuthContext";
 import {
   faCamera,
+  faCaretDown,
+  faCaretRight,
   faHome,
   faListUl,
   faMap,
   faSearch,
 } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
+import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useEffect, useRef, useState } from "react";
 
 export const NavBar = (): React.ReactElement => {
   const { user, isLoggedIn, logout, loading } = useAuth();
   const [isVisible, setIsVisible] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   useEffect(() => {
     // Bikin animasi muncul setelah mount
     const timer = setTimeout(() => setIsVisible(true), 100);
     return () => clearTimeout(timer);
   }, []);
-  const router = useRouter();
+
+  // Handle click outside to close dropdown
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event!.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <div
@@ -49,26 +70,59 @@ export const NavBar = (): React.ReactElement => {
                 Region
               </Link>
             </div>
-            <button
-              type="button"
-              disabled={loading}
-              onClick={() =>
-                isLoggedIn ? logout() : router.push("auth/login")
-              }
-              className="cursor-pointer rounded-2xl px-4 py-1 bg-red-500 text-white hover:bg-red-800 disabled:bg-red-400"
-            >
-              {isLoggedIn ? "Sign Out" : "Sign In"}
-            </button>
             {isLoggedIn ? (
               <button
                 type="button"
-                className="cursor-pointer rounded-2xl px-4 py-1 bg-red-500 text-white hover:bg-red-800"
+                disabled={loading}
+                onClick={logout}
+                className="cursor-pointer rounded-2xl px-4 py-1 bg-red-500 text-white hover:bg-red-800 disabled:bg-red-400 hidden sm:block"
               >
-                {user?.name}
+                Sign Out
               </button>
             ) : (
               ""
             )}
+
+            <div className="relative inline-block text-left" ref={dropdownRef}>
+              <div>
+                <button
+                  type="button"
+                  onClick={() =>
+                    isLoggedIn ? setIsOpen(true) : router.push("auth/login")
+                  }
+                  className="cursor-pointer rounded-2xl px-4 py-1 bg-red-500 text-white hover:bg-red-800"
+                >
+                  {user?.name ?? "Sign In"}
+                  {isLoggedIn ? (
+                    <div className="inline-block sm:hidden">
+                      <FontAwesomeIcon
+                        icon={isOpen ? faCaretRight : faCaretDown}
+                        className="ml-2"
+                      />
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                </button>
+              </div>
+
+              {isOpen && (
+                <div className="inline-block sm:hidden origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                  <div className="py-1" role="menu">
+                    <button
+                      onClick={() => {
+                        logout();
+                        setIsOpen(false);
+                      }}
+                      className="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+                      role="menuitem"
+                    >
+                      Logout
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>

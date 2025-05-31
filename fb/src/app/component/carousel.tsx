@@ -56,7 +56,6 @@ const Carousel: React.FC<CarouselProps> = ({
               priority={index === currentIndex}
               className="rounded-sm object-cover"
             />
-            {img}
           </div>
         ))}
       </div>
