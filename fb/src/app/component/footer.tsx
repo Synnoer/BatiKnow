@@ -4,7 +4,7 @@ import React from "react";
 
 export const Footer = (): React.ReactElement => {
   return (
-    <div className="sm:pb-10 bg-red-800 text-white">
+    <div className="bg-red-800 text-white">
       <div className="flex justify-around text-wrap pt-10 pb-24 max-w-6xl mx-auto">
         <div>
           <h3 className="text-lg font-bold">BatiKnow</h3>

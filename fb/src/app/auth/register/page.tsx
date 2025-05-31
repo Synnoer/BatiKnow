@@ -34,12 +34,10 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-      <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-gray-800">Register</h1>
-        <p className="text-gray-600 mt-2">
-          Please enter your details to sign up
-        </p>
+    <div className="bg-white text-black p-8 rounded-lg shadow-lg w-full max-w-md">
+      <div className="text-center">
+        <h1 className="text-3xl text-red-500 font-bold mb-8">Daftar Akun</h1>
+        
       </div>
 
       <form onSubmit={handleSubmit}>
@@ -117,8 +115,8 @@ export default function LoginPage() {
         </button>
 
         <div className="mt-6 text-center">
-          <p className="text-gray-600 text-sm">
-            Already have an account?
+          <p className="text-sm">
+            Already have an account? 
             <Link
               href="/auth/login"
               className="text-red-500 hover:text-red-800 font-medium"

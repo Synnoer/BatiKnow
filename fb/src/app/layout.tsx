@@ -27,7 +27,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         suppressHydrationWarning
-        className={`${poppinsSans.className} antialiased flex flex-col min-h-screen bg-gray-100`}
+        className={`${poppinsSans.className} antialiased flex flex-col min-h-screen pb-16 sm:pb-0 bg-gray-100`}
       >
         <Toaster />
         <NavBar />
