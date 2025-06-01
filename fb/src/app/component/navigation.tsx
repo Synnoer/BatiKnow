@@ -88,7 +88,7 @@ export const NavBar = (): React.ReactElement => {
                 <button
                   type="button"
                   onClick={() =>
-                    isLoggedIn ? setIsOpen(true) : router.push("auth/login")
+                    isLoggedIn ? setIsOpen(true) : router.push("/auth/login")
                   }
                   className="cursor-pointer rounded-2xl px-4 py-1 bg-red-500 text-white hover:bg-red-800"
                 >
