@@ -18,11 +18,15 @@ export default function BatikDetailPage() {
   useEffect(() => {
     const getBatik = async () => {
       setLoading(true);
-      const res = await fetch(`/api/batik/${uuid}`, { cache: "no-store" });
+      try {
+        const res = await fetch(`/api/batik/${uuid}`);
 
-      const data = await res.json();
+        const data = await res.json();
 
-      setBatik(data.data);
+        setBatik(data.data);
+      } catch (e) {
+        console.log(e);
+      }
       setLoading(false);
     };
     getBatik();
