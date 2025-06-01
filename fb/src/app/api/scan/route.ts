@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
     const formData = await req.formData();
     const image = formData.get('image');
 
-    if (image instanceof File) {
+    if (image instanceof Blob) {
         const buffer = Buffer.from(await image.arrayBuffer());
 
         const classId = await scan(buffer);
