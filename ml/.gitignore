@@ -1,0 +1,4 @@
+# virtual environment
+.conda
+.venv
+__pycache__
