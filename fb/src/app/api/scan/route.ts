@@ -2,7 +2,6 @@ import fs from 'fs';
 import path from 'path';
 import prisma from '@/lib/prisma';
 import { User } from '@/context/AuthContext';
-import { scan } from '@/lib/model';
 import { randomUUID } from 'crypto';
 import { verifyToken } from '@/lib/jwt';
 import { NextRequest, NextResponse } from 'next/server';
@@ -26,11 +25,17 @@ export async function POST(req: NextRequest) {
     if (image instanceof Blob) {
         const buffer = Buffer.from(await image.arrayBuffer());
 
-        const classId = await scan(buffer);
+        const res = await fetch(process.env.PREDICTOR_URL!, {
+            method: "POST",
+            body: formData
+        })
+        if (!res.ok)
+            return NextResponse.json({ message: 'Scan failed' }, { status: 404 });
 
-        const batik = await prisma.batik.findFirst({ where: { classId } })
+        const { class_id, confidence } = await res.json()
+        const batik = await prisma.batik.findFirst({ where: { classId: class_id.toString() } })
 
-        if (!user) return NextResponse.json({ message: 'Batik scanned successfully.', batik });
+        if (!user) return NextResponse.json({ message: 'Batik scanned successfully.', batik, confidence });
 
         const filename = randomUUID() + '.' + image.name;
         fs.writeFileSync(path.resolve(__dirname, '../../../../../public/uploads', filename), buffer);
@@ -43,7 +48,7 @@ export async function POST(req: NextRequest) {
             }
         })
 
-        return NextResponse.json({ message: 'Batik scanned successfully.', batik, history });
+        return NextResponse.json({ message: 'Batik scanned successfully.', batik, history, confidence });
     }
     return NextResponse.json({ message: 'Scan failed' }, { status: 404 });
 }
