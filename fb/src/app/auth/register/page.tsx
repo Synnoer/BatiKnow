@@ -10,6 +10,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FormEvent, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function LoginPage() {
   const { register, loading } = useAuth();
@@ -25,103 +26,103 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="bg-white text-black p-8 rounded-lg shadow-lg w-full max-w-md">
+    <div className="bg-white text-black p-8 rounded-lg shadow-lg w-full max-w-4xl">
       <div className="text-center">
         <h1 className="text-3xl text-red-500 font-bold mb-8">Daftar Akun</h1>
-        
       </div>
 
-      <form onSubmit={handleSubmit}>
-        <div className="mb-4">
-          <label
-            htmlFor="name"
-            className="block text-gray-700 text-sm font-medium mb-2"
-          >
-            Name
-          </label>
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <FontAwesomeIcon icon={faAddressCard} className="text-gray-400" />
+      <div className="sm:grid sm:grid-cols-2 sm:items-center">
+        <Image src="/logos/batiknow-logo-transparent-2.png" alt="login icon" width={500} height={500} className="w-full hidden sm:block" />
+        <div className="sm:block">
+          <form onSubmit={handleSubmit}>
+            <div className="mb-4">
+              <label
+                htmlFor="name"
+                className="block text-gray-700 text-sm font-medium mb-1"
+              >
+                Name
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <FontAwesomeIcon icon={faAddressCard} className="text-gray-400" />
+                </div>
+                <input
+                  type="text"
+                  id="name"
+                  className="w-full pl-10 pr-3 py-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent text-black"
+                  placeholder="Name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
             </div>
-            <input
-              type="text"
-              id="name"
-              className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent text-black"
-              placeholder="Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </div>
-        </div>
-
-        <div className="mb-4">
-          <label
-            htmlFor="username"
-            className="block text-gray-700 text-sm font-medium mb-2"
-          >
-            Username
-          </label>
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <FontAwesomeIcon icon={faUser} className="text-gray-400" />
+            <div className="mb-4">
+              <label
+                htmlFor="username"
+                className="block text-gray-700 text-sm font-medium mb-1"
+              >
+                Username
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <FontAwesomeIcon icon={faUser} className="text-gray-400" />
+                </div>
+                <input
+                  type="text"
+                  id="username"
+                  className="w-full pl-10 pr-3 py-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent text-black"
+                  placeholder="Username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+              </div>
             </div>
-            <input
-              type="text"
-              id="username"
-              className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent text-black"
-              placeholder="Username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </div>
-        </div>
-
-        <div className="mb-6">
-          <label
-            htmlFor="password"
-            className="block text-gray-700 text-sm font-medium mb-2"
-          >
-            Password
-          </label>
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <FontAwesomeIcon icon={faLock} className="text-gray-400" />
+            <div className="mb-6">
+              <label
+                htmlFor="password"
+                className="block text-gray-700 text-sm font-medium mb-1"
+              >
+                Password
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <FontAwesomeIcon icon={faLock} className="text-gray-400" />
+                </div>
+                <input
+                  type="password"
+                  id="password"
+                  className="w-full pl-10 pr-3 py-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent text-black"
+                  placeholder="••••••••"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
             </div>
-            <input
-              type="password"
-              id="password"
-              className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent text-black"
-              placeholder="••••••••"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-        </div>
-
-        <button
-          disabled={loading}
-          type="submit"
-          className="w-full bg-red-500 hover:bg-red-800 text-white font-medium py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition duration-150"
-        >
-          {loading ? (
-            <FontAwesomeIcon icon={faSpinner} className="fa-spin" />
-          ) : (
-            "Sign Up"
-          )}
-        </button>
-
-        <div className="mt-6 text-center">
-          <p className="text-sm">
-            Already have an account? 
-            <Link
-              href="/auth/login"
-              className="text-red-500 hover:text-red-800 font-medium"
+            <button
+              disabled={loading}
+              type="submit"
+              className="w-full bg-red-500 hover:bg-red-800 text-white font-medium py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition duration-150"
             >
-              Sign in
-            </Link>
-          </p>
+              {loading ? (
+                <FontAwesomeIcon icon={faSpinner} className="fa-spin" />
+              ) : (
+                "Sign Up"
+              )}
+            </button>
+            <div className="mt-6 text-center">
+              <p className="text-sm">
+                Already have an account?
+                <Link
+                  href="/auth/login"
+                  className="text-red-500 hover:text-red-800 font-medium"
+                >
+                  Sign in
+                </Link>
+              </p>
+            </div>
+          </form>
         </div>
-      </form>
+      </div>
     </div>
   );
 }
