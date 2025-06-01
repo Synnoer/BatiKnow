@@ -1,0 +1,42 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../db/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Batik {
+  uuid        String    @unique(map: "Batik_uuid_key") @default(uuid())
+  classId     String?
+  name        String
+  originCity  String
+  description String    @db.Text
+  reference   String
+  history     History[]
+}
+
+model History {
+  uuid       String   @unique(map: "History_uuid_key") @default(uuid())
+  userUuid   String
+  batikUuid  String
+  pictureUrl String
+  createdAt  DateTime @default(now())
+  batik      Batik    @relation(fields: [batikUuid], references: [uuid], map: "History_batikUuid_fkey")
+  user       User     @relation(fields: [userUuid], references: [uuid], map: "History_userUuid_fkey")
+
+  @@index([batikUuid], map: "History_batikUuid_fkey")
+  @@index([userUuid], map: "History_userUuid_fkey")
+}
+
+model User {
+  uuid      String    @unique(map: "User_uuid_key") @default(uuid())
+  username  String    @unique(map: "User_username_key")
+  name      String
+  password  String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now())
+  history   History[]
+}
