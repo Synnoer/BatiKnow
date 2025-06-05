@@ -15,7 +15,7 @@ const nextConfigFunction = async (phase: string) => {
   const customRuntimeCaching: RuntimeCaching[] = [
     ...runtimeCaching,
     {
-      urlPattern: /^\/batik\/.*$/,
+      urlPattern: /^\/list(\/.*)?$/,
       handler: 'NetworkFirst',
       options: {
         cacheName: 'batik-detail-pages',
@@ -29,7 +29,7 @@ const nextConfigFunction = async (phase: string) => {
       },
     },
     {
-      urlPattern: /^\/api\/batik\/.*$/,
+      urlPattern: /^\/api\/batik(\/.*)?$/,
       handler: 'NetworkFirst',
       options: {
         cacheName: 'batik-api-detail',

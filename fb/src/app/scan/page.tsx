@@ -67,10 +67,13 @@ export default function ScanLayout() {
 
     try {
       const res = await fetch("/api/scan", { method: "POST", body: formData });
-
-      if (!res.ok) toast.error("Scan failed");
-
       const result = await res.json();
+
+      if (!res.ok) {
+        toast.error(result.message || "Scan failed");
+        return setLoading(false);
+      }
+
       setBatik(result.batik);
       toast.success(result.message);
     } catch (e: unknown) {

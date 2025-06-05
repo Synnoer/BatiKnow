@@ -72,7 +72,8 @@ export default function HistoryLayout() {
                   fill
                   className="object-cover rounded-md"
                   onError={(e) => {
-                    (e.target as HTMLImageElement).src = "/placeholder.jpg";
+                    console.log(e);
+                    (e.target as HTMLImageElement).src = "/photo-add-placeholder 1.png";
                   }}
                 />
               </div>

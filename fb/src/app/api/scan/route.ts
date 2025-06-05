@@ -33,6 +33,8 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ message: 'Scan failed' }, { status: 404 });
 
         const { class_id, confidence } = await res.json()
+        console.log(class_id, confidence);
+
         const batik = await prisma.batik.findFirst({ where: { classId: class_id.toString() } })
 
         if (!user) return NextResponse.json({ message: 'Batik scanned successfully.', batik, confidence });
@@ -40,15 +42,20 @@ export async function POST(req: NextRequest) {
         const filename = randomUUID() + '.' + image.name;
         fs.writeFileSync(path.resolve(__dirname, '../../../../../public/uploads', filename), buffer);
 
-        const history = await prisma.history.create({
-            data: {
-                userUuid: user.uuid,
-                batikUuid: batik!.uuid,
-                pictureUrl: filename,
-            }
-        })
+        try {
+            const history = await prisma.history.create({
+                data: {
+                    userUuid: user.uuid,
+                    batikUuid: batik!.uuid,
+                    pictureUrl: filename,
+                }
+            })
 
-        return NextResponse.json({ message: 'Batik scanned successfully.', batik, history, confidence });
+            return NextResponse.json({ message: 'Batik scanned successfully.', batik, history, confidence });
+        } catch (e) {
+            console.log(e)
+            return NextResponse.json({ message: (e as Error).message }, { status: 500 });
+        }
     }
     return NextResponse.json({ message: 'Scan failed' }, { status: 404 });
 }
