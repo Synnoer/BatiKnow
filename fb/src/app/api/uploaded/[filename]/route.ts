@@ -1,13 +1,13 @@
 import fs from 'fs/promises';
 import path from 'path';
 import mime from 'mime-types';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(
-    req: Request,
-    { params }: { params: { filename: string } }
+    req: NextRequest,
+    { params }: { params: Promise<{ filename: string }> }
 ) {
-    const filename = params.filename;
+    const { filename } = await params;
     const filePath = path.resolve('../../../../../public/uploads', filename);
 
     try {
