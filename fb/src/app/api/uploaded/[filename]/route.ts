@@ -8,7 +8,7 @@ export async function GET(
     { params }: { params: Promise<{ filename: string }> }
 ) {
     const { filename } = await params;
-    const filePath = path.resolve('../../../../../public/uploads', filename);
+    const filePath = path.resolve('./public/uploads', filename);
 
     try {
         const fileData = await fs.readFile(filePath);

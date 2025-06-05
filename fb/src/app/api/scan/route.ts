@@ -13,7 +13,6 @@ export async function POST(req: NextRequest) {
     if (token) {
         try {
             user = verifyToken(token?.value) as User;
-            console.log(user)
         } catch (error) {
             console.log((error as Error).message)
         }
@@ -40,7 +39,7 @@ export async function POST(req: NextRequest) {
         if (!user) return NextResponse.json({ message: 'Batik scanned successfully.', batik, confidence });
 
         const filename = randomUUID() + '.' + image.name;
-        fs.writeFileSync(path.resolve(__dirname, '../../../../../public/uploads', filename), buffer);
+        fs.writeFileSync(path.resolve('./public/uploads', filename), buffer);
 
         try {
             const history = await prisma.history.create({
