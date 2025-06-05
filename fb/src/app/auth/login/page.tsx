@@ -26,14 +26,16 @@ export default function LoginPage() {
       </div>
 
       <div className="sm:grid sm:grid-cols-2 sm:items-center">
-        <Image src="/logos/batiknow-logo-transparent-2.png" alt="login icon" width={500} height={500} className="w-full hidden sm:block" />
+        <div>
+          <Image src="/logos/batiknow-logo-transparent-2.png" alt="login icon" width={500} height={500} className="w-full hidden sm:block" />
+              <p className="text-2xl text-left mt-2">
+                Selamat datang di <strong className="text-red-500">BatiKnow!</strong>
+              </p>
+              <p className="text-left mb-4">
+                Jelajahi dunia batik di Indonesia bersama kami.
+              </p>
+        </div>
         <div className="sm:block">
-            <p className="text-2xl text-left mt-2">
-              Selamat datang di <strong className="text-red-500">BatiKnow!</strong>
-            </p>
-            <p className="text-left mb-4">
-              Jelajahi dunia batik di Indonesia bersama kami.
-            </p>
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <label

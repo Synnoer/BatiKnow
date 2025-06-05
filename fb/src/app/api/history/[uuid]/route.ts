@@ -5,13 +5,19 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest, { params }: { params: Promise<{ uuid: string }> }) {
   const token = req.cookies.get('token');
-  if (token?.value == null) return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })
+  if (!token?.value) return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
 
-  const user = verifyToken(token?.value) as User;
-  const awaitedParams = await params;  // <-- tambahkan ini
+  const user = verifyToken(token.value) as User;
+  const { uuid } = await params;
 
-  const history = await prisma.history.findUnique({
-    where: { uuid: awaitedParams.uuid, userUuid: user.uuid },
+  const history = await prisma.history.findFirst({
+    where: {
+      uuid,
+      userUuid: user.uuid,
+    },
+    include: {
+      batik: true,
+    },
   });
 
   if (!history) {
