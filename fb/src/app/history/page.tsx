@@ -67,7 +67,7 @@ export default function HistoryLayout() {
             >
               <div className="relative w-full h-48 mb-2 overflow-hidden rounded-md">
                 <Image
-                  src={`/uploads/${history.pictureUrl}`}
+                  src={`/api/uploaded/${history.pictureUrl}`}
                   alt={`Motif Batik`}
                   fill
                   className="object-cover rounded-md"
