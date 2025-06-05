@@ -4,9 +4,9 @@ import {
   faCamera,
   faCaretDown,
   faCaretRight,
+  faClockRotateLeft,
   faHome,
   faListUl,
-  faSearch,
 } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
@@ -23,12 +23,10 @@ export const NavBar = (): React.ReactElement => {
   const pathname = usePathname();
 
   useEffect(() => {
-    // Bikin animasi muncul setelah mount
     const timer = setTimeout(() => setIsVisible(true), 100);
     return () => clearTimeout(timer);
   }, []);
 
-  // Handle click outside to close dropdown
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -87,6 +85,18 @@ export const NavBar = (): React.ReactElement => {
               >
                 List
               </Link>
+              {isLoggedIn ? (
+                <Link
+                href="/history"
+                className={`hover:text-red-500 ${
+                  pathname.startsWith("/history")
+                    ? "text-red-700 border-y-red-500 border-y-2"
+                    : ""
+                }`}
+                >
+                  History
+                </Link>
+              ) : ("")}
             </div>
             {isLoggedIn ? (
               <button
@@ -160,14 +170,6 @@ export const NavBar = (): React.ReactElement => {
           <FontAwesomeIcon icon={faHome} />
         </Link>
         <Link
-          href="/list"
-          className={`flex hover:bg-white hover:text-red-500 hover:text-2xl rounded-full p-6 w-9 h-9 items-center justify-center ${
-            pathname.startsWith("/list") ? "text-red-700 bg-white" : ""
-          }`}
-        >
-          <FontAwesomeIcon icon={faListUl} />
-        </Link>
-        <Link
           href="/scan"
           className={`flex hover:bg-white hover:text-red-500 hover:text-2xl rounded-full p-6 w-9 h-9 items-center justify-center ${
             pathname.startsWith("/scan") ? "text-red-700 bg-white" : ""
@@ -176,13 +178,23 @@ export const NavBar = (): React.ReactElement => {
           <FontAwesomeIcon icon={faCamera} />
         </Link>
         <Link
-          href="/search"
+          href="/list"
           className={`flex hover:bg-white hover:text-red-500 hover:text-2xl rounded-full p-6 w-9 h-9 items-center justify-center ${
-            pathname.startsWith("/search") ? "text-red-700 bg-white" : ""
+            pathname.startsWith("/list") ? "text-red-700 bg-white" : ""
           }`}
         >
-          <FontAwesomeIcon icon={faSearch} />
+          <FontAwesomeIcon icon={faListUl} />
         </Link>
+        {isLoggedIn ? (
+          <Link
+          href="/history"
+          className={`flex hover:bg-white hover:text-red-500 hover:text-2xl rounded-full p-6 w-9 h-9 items-center justify-center ${
+            pathname.startsWith("/history") ? "text-red-700 bg-white" : ""
+          }`}
+        >
+          <FontAwesomeIcon icon={faClockRotateLeft} />
+        </Link>
+        ) : ("")}
       </div>
     </div>
   );

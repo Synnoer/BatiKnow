@@ -56,10 +56,12 @@ export default function BatikDetailPage() {
               <p className="text-gray-600">Asal : {batik.originCity}</p>
 
               <div className="text-left">
-                <h3 className="text-lg my-2">Deskripsi :</h3>
+                <h3 className="font-semibold text-lg my-2">Deskripsi :</h3>
 
                 <p className="rounded-sm bg-gray-200 p-2">
                   {batik.description}
+                  <br /><br />
+                  Referensi : {batik.reference}
                 </p>
               </div>
             </div>
