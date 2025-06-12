@@ -11,3 +11,4 @@ Batiknow merupakan aplikasi pengenal motif batik yang bersifat interaktif dan me
 ## Design
 ## Machine Learning
 ## Web Development
+## Result
