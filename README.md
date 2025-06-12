@@ -10,31 +10,48 @@ Batiknow merupakan aplikasi pengenal motif batik yang bersifat interaktif dan me
 
 
 ## Machine Learning
-## Web Development
-### Authentication
+## 🌐 Web Development
+### 🔐 Authentication
 #### login
+
+Halaman login memungkinkan pengguna masuk menggunakan kredensial yang telah terdaftar.
+
+
 ![image](https://raw.githubusercontent.com/Synnoer/BatiKnow/refs/heads/main/assets/Cuplikan%20layar%202025-06-12%20183709.png)
 
 #### Register
+Pengguna baru dapat mendaftarkan akun melalui halaman register untuk mulai menggunakan fitur aplikasi.
+
+
 
 ![image](https://raw.githubusercontent.com/Synnoer/BatiKnow/refs/heads/main/assets/Cuplikan%20layar%202025-06-12%20183918.png)
 
 #### Home Page
 
+Menampilkan beranda utama setelah login, dengan akses cepat ke fitur pemindaian dan daftar data.
+
+
 ![image](http://raw.githubusercontent.com/Synnoer/BatiKnow/refs/heads/main/assets/Cuplikan%20layar%202025-06-12%20183349.png)
 
 #### Scan Page
+
+Fitur pemindaian motif batik menggunakan kamera atau gambar yang diunggah.
+
+
 
 
 ![image](https://raw.githubusercontent.com/Synnoer/BatiKnow/refs/heads/main/assets/Cuplikan%20layar%202025-06-12%20183408.png)
 
 #### List Page
+Menampilkan daftar hasil identifikasi motif batik beserta informasi lengkapnya.
+
+
 
 ![image](https://raw.githubusercontent.com/Synnoer/BatiKnow/refs/heads/main/assets/Cuplikan%20layar%202025-06-12%20183420.png)
 
 ## App Demo
 
-📹 [Lihat Demo Video](https://drive.google.com/file/d/1k_5vPifblnb-84AFz_4Xg1aRKFmP4Jib/view)
+![Demo JejakBatik](https://github.com/Synnoer/BatiKnow/raw/main/assets/demo.gif)
 
 
 ## Result
