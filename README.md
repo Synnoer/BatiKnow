@@ -8,5 +8,6 @@ Batiknow merupakan aplikasi pengenal motif batik yang bersifat interaktif dan me
 - FC222D5Y1701 - Denis Firmansyah - UIN SGD Bandung - [Aktif]
 - FC222D5Y1324 - Devi Mulyana - UIN SGD Bandung - [Aktif]
 
+## Design
 ## Machine Learning
 ## Web Development
