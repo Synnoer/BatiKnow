@@ -34,4 +34,7 @@ Batiknow merupakan aplikasi pengenal motif batik yang bersifat interaktif dan me
 
 ## App Demo
 
+📹 [Lihat Demo Video](https://drive.google.com/file/d/1k_5vPifblnb-84AFz_4Xg1aRKFmP4Jib/view)
+
+
 ## Result
