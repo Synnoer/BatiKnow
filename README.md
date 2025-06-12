@@ -12,14 +12,14 @@ Batiknow merupakan aplikasi pengenal motif batik yang bersifat interaktif dan me
 ## Machine Learning
 ## 🌐 Web Development
 ### 🔐 Authentication
-#### login
+#### Login Page
 
 Halaman login memungkinkan pengguna masuk menggunakan kredensial yang telah terdaftar.
 
 
 ![image](https://raw.githubusercontent.com/Synnoer/BatiKnow/refs/heads/main/assets/Cuplikan%20layar%202025-06-12%20183709.png)
 
-#### Register
+#### Register Page
 Pengguna baru dapat mendaftarkan akun melalui halaman register untuk mulai menggunakan fitur aplikasi.
 
 
@@ -28,14 +28,14 @@ Pengguna baru dapat mendaftarkan akun melalui halaman register untuk mulai mengg
 
 #### Home Page
 
-Menampilkan beranda utama setelah login, dengan akses cepat ke fitur pemindaian dan daftar data.
+Menampilkan beranda utama secara default, dengan akses cepat ke fitur pemindaian dan daftar data.
 
 
 ![image](http://raw.githubusercontent.com/Synnoer/BatiKnow/refs/heads/main/assets/Cuplikan%20layar%202025-06-12%20183349.png)
 
 #### Scan Page
 
-Fitur pemindaian motif batik menggunakan kamera atau gambar yang diunggah.
+Fitur pemindaian motif batik menggunakan kamera atau gambar yang diunggah dengan bantuan Machine Learning.
 
 
 
