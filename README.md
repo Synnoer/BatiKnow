@@ -9,7 +9,15 @@ Batiknow merupakan aplikasi pengenal motif batik yang bersifat interaktif dan me
 - FC222D5Y1324 - Devi Mulyana - UIN SGD Bandung - [Aktif]
 
 
-## Machine Learning
+## 🤖 Machine Learning
+Dalam proyek ini, kami menggunakan EfficientNetB0 sebagai backbone utama dari arsitektur model klasifikasi citra. EfficientNetB0 merupakan model konvolusional yang telah dilatih sebelumnya (pretrained) pada dataset ImageNet, dan sangat dikenal karena efisiensi serta performa akurasinya yang tinggi dengan jumlah parameter relatif kecil.
+
+![image](https://raw.githubusercontent.com/Synnoer/BatiKnow/refs/heads/main/assets/Cuplikan%20layar%202025-06-12%20201226.png)
+
+![image](https://raw.githubusercontent.com/Synnoer/BatiKnow/refs/heads/main/assets/Cuplikan%20layar%202025-06-12%20201358.png)
+![image](https://raw.githubusercontent.com/Synnoer/BatiKnow/refs/heads/main/assets/Cuplikan%20layar%202025-06-12%20201337.png)
+
+
 ## 🌐 Web Development
 ### 🔐 Authentication
 #### Login Page
@@ -55,3 +63,7 @@ Menampilkan daftar hasil identifikasi motif batik beserta informasi lengkapnya.
 
 
 ## Result
+
+Model klasifikasi citra yang dibangun menunjukkan performa yang sangat baik pada data validasi dan data uji. Pada data validasi, model mencapai akurasi sebesar 90,03% dengan nilai loss sebesar 0,552, sedangkan pada data uji (test set), akurasi yang dicapai adalah 90,87% dengan nilai loss sebesar 0,419. Hasil ini mengindikasikan bahwa model mampu melakukan generalisasi dengan baik terhadap data yang belum pernah dilihat sebelumnya, tanpa mengalami overfitting. Akurasi pada data pelatihan juga cukup tinggi, yakni sebesar 89,40% dengan nilai loss 0,6208, yang relatif seimbang dengan akurasi pada data validasi dan uji. Perbedaan yang kecil antara akurasi pada data pelatihan, validasi, dan uji menunjukkan bahwa model terlatih dengan stabil dan memiliki kemampuan klasifikasi yang kuat. Dengan kata lain, kombinasi arsitektur EfficientNetB0 sebagai backbone dan lapisan klasifikasi tambahan berhasil memberikan hasil yang optimal untuk tugas klasifikasi ini.
+
+## Untuk melihat secara langsung bagaimana sistem ini bekerja, Anda dapat mencoba aplikasinya melalui website resmi kami: https://batiknow.site/.
