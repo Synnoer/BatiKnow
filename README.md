@@ -10,7 +10,7 @@ Batiknow merupakan aplikasi pengenal motif batik yang bersifat interaktif dan me
 
 
 ## 🤖 Machine Learning
-Dalam proyek ini, kami menggunakan EfficientNetB0 sebagai backbone utama dari arsitektur model klasifikasi citra. EfficientNetB0 merupakan model konvolusional yang telah dilatih sebelumnya (pretrained) pada dataset ImageNet, dan sangat dikenal karena efisiensi serta performa akurasinya yang tinggi dengan jumlah parameter relatif kecil.
+Dalam proyek ini, Model dibangun dengan transfer learning EfficientNet menambahkan custom head untuk klasifikasi, model ini mampu melakukan pengenalan motif batik secara lebih efisien dan akurat, meskipun dengan jumlah data pelatihan yang relatif terbatas.
 
 ![image](https://raw.githubusercontent.com/Synnoer/BatiKnow/refs/heads/main/assets/Cuplikan%20layar%202025-06-12%20201226.png)
 
