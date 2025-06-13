@@ -57,7 +57,10 @@ Menampilkan daftar hasil identifikasi motif batik beserta informasi lengkapnya.
 
 ![image](https://raw.githubusercontent.com/Synnoer/BatiKnow/refs/heads/main/assets/Cuplikan%20layar%202025-06-12%20183420.png)
 
+
 ## App Demo
+
+[🎥 Demo JejakBatik - YouTube](https://www.youtube.com/watch?v=_JdJLD_nqCY)
 
 ![Demo JejakBatik](https://github.com/Synnoer/BatiKnow/raw/main/assets/demo.gif)
 
